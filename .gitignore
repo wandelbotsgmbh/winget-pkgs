@@ -1,3 +1,6 @@
 kubeconfig
 .DS_Store/
 test.txt
+source.zip
+source/
+openapi.yaml
