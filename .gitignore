@@ -1,6 +1,9 @@
 kubeconfig
-.DS_Store/
+.DS_Store
 test.txt
 source.zip
 source/
 openapi.yaml
+.ruff_cache/
+.tmp/
+.venv/

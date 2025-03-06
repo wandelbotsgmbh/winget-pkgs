@@ -1,8 +1,8 @@
-# Created using wingetcreate 1.9.4.0
-# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.9.0.schema.json
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.4.0.schema.json
 
 PackageIdentifier: WandelbotsGmbH.NovaCLI
 PackageVersion: 0.0.162
+InstallerLocale: en-US
 InstallerType: zip
 Installers:
 - Architecture: x64
@@ -13,4 +13,9 @@ Installers:
   InstallerUrl: https://github.com/wandelbotsgmbh/nova-cli/releases/download/0.0.162/novacli_win64-0.0.162.zip
   InstallerSha256: 3d09d47fa546994bdb1c9706f335d3900dc6f1d1976643f0b67ea6f17bf6413b
 ManifestType: installer
-ManifestVersion: 1.9.0
+ManifestVersion: 1.4.0
+Scope: user
+UpgradeBehavior: uninstallPrevious
+InstallModes:
+  - silent
+  - silentWithProgress

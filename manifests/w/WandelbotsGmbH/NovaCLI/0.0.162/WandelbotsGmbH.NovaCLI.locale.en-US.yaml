@@ -1,13 +1,20 @@
-# Created using wingetcreate 1.9.4.0
-# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.9.0.schema.json
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.4.0.schema.json
 
+Author: Wandelbots GmbH
 PackageIdentifier: WandelbotsGmbH.NovaCLI
 PackageVersion: 0.0.162
 PackageLocale: en-US
 Publisher: Wandelbots GmbH
 PackageName: NovaCLI
 License: MIT-Lizenz
-Copyright: © Wandelbots GmbH. All rights reserved.
-ShortDescription: Nova Command Line
+Copyright: Copyright (c) Wandelbots GmbH.
+ShortDescription: Command line tool for interacting with the Wandelbots Nova.
 ManifestType: defaultLocale
-ManifestVersion: 1.9.0
+ManifestVersion: 1.4.0
+Moniker: novacli
+PackageUrl: https://github.com/wandelbotsgmbh/nova-cli
+PublisherSupportUrl: https://github.com/wandelbotsgmbh/nova-cli
+PublisherUrl: https://www.wandelbots.com/
+Tags:
+  - wandelbots
+  - nova
