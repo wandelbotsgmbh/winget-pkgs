@@ -6,7 +6,7 @@
 
   <Identity Name="WandelbotsGmbH.Winget.Source"
             ProcessorArchitecture="neutral"
-            Publisher="CN=Wandelbots GmbH, O=Wandelbots GmbH, STREET=Tharandter Str. 33, L=Dresden, S=Saxony, C=DE, OID.1.3.6.1.4.1.311.60.2.1.1=Dresden, OID.1.3.6.1.4.1.311.60.2.1.2=Dresden, OID.1.3.6.1.4.1.311.60.2.1.3=DE, SERIALNUMBER=HRB 37186, OID.2.5.4.15=Private Organization"
+            Publisher="CN=Wandelbots GmbH, O=Wandelbots GmbH, STREET=Tharandter Str. 33, L=Dresden, S=Saxony, C=DE"
             Version="1.25772.16933.0" />
 
   <Properties>
