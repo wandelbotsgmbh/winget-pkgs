@@ -6,5 +6,5 @@ This repository contains manifests for the [winget-cli](https://github.com/micro
 
 ```bash
 # adding wandelbots as source might require admin rights
-winget source add --name wandelbots --arg https://github.com/wandelbotsgmbh/winget-pkgs
+winget source add --name wandelbots --arg https://wandelbotsgmbh.github.io/winget-pkgs
 ```
