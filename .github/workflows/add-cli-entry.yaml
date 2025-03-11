@@ -1,0 +1,67 @@
+---
+name: Add New Nova CLI Entry
+
+on: # yamllint disable-line rule:truthy
+  repository_dispatch:
+    types: [add-nova-cli-entry]
+
+jobs:
+  update-catalog:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      VERSION: ${{ github.event.client_payload.version }}
+      FILE_HASH: ${{ github.event.client_payload.hash }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+
+      - name: Verify Parameters
+        run: |
+          echo "Version: ${VERSION}"
+          echo "File Hash: ${FILE_HASH}"
+
+          if [ -z "${VERSION}" ]; then
+            echo "missing field 'version'"
+            exit 1
+          fi
+
+          if [ -z "${FILE_HASH}" ]; then
+            echo "missing field 'hash'"
+            exit 1
+          fi
+
+      - name: Install Python
+        run: |
+          cd scripts
+          uv python install
+
+      - name: Create New Entry
+        env:
+          # somehow env vars where missing in the yq action, so we reassign them
+          VERSION: ${{ github.event.client_payload.version }}
+          FILE_HASH: ${{ github.event.client_payload.hash }}
+        run: |
+          cd scripts
+          uv run 01-create-entry.sh $VERSION $FILE_HASH
+
+      - name: Create PR
+        env:
+          GH_TOKEN: ${{ secrets.PAT_FOR_UPDATE_ACTION }}
+          VERSION: ${{ github.event.client_payload.version }}
+        run: |
+          BRANCH="feature/update-cli-to-${VERSION}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git checkout -b $BRANCH
+
+          git add manifest/*
+          git commit -m "Update cli to ${VERSION}"
+          git push -u origin $BRANCH
+
+          gh pr create --title "Update cli to ${VERSION}" --body "Automated PR from Nova CLI release" --base main
+          gh pr merge --squash --auto
