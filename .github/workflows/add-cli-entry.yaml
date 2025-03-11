@@ -6,7 +6,7 @@ on: # yamllint disable-line rule:truthy
     types: [add-nova-cli-entry]
 
 jobs:
-  update-catalog:
+  add-nova-cli-entry:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -45,7 +45,7 @@ jobs:
           FILE_HASH: ${{ github.event.client_payload.hash }}
         run: |
           cd scripts
-          uv run 01-create-entry.sh $VERSION $FILE_HASH
+          uv run 01-create-entry.py $VERSION $FILE_HASH
 
       - name: Create PR
         env:
