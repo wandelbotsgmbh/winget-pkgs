@@ -1,13 +1,12 @@
 import hashlib
 import os
-import time
 import re
-import yaml
-
-
 import sqlite3
+import time
 from sqlite3 import Error
 from subprocess import check_output
+
+import yaml
 
 db_path = ".tmp/source/Public/index.db"
 
@@ -196,31 +195,6 @@ def create_catalog(con):
             manifest += 1
 
 
-def merge_manifests():
-    for root, _, files in os.walk("../manifests"):
-        if re.match(".*(?:[0-9]+\\.?){2,3}\\.[0-9]+$", root):
-            merged_data = {}
-            for file in files:
-                if file.endswith(".yaml"):
-                    filename = os.path.join(root, file)
-                    with open(filename, "r") as stream:
-                        try:
-                            data = yaml.safe_load(stream)
-                            if data:
-                                # merges the data
-                                merged_data = merged_data.copy()
-                                merged_data.update(data)
-                        except yaml.YAMLError as exc:
-                            print(exc)
-                            break
-            merged_data["ManifestType"] = "merged"
-            merged_name = "264a-" + merged_data["PackageIdentifier"] + ".yaml"
-            output_file = os.path.join(root, merged_name)
-
-            with open(output_file, "w") as f:
-                f.write(yaml.dump(merged_data))
-
-
 if __name__ == "__main__":
     if os.path.exists(db_path):
         os.remove(db_path)
@@ -237,7 +211,6 @@ if __name__ == "__main__":
         cur.executescript(sql_as_string)
         con.commit()
 
-        merge_manifests()
         create_catalog(con)
     except Error as e:
         print(e)
