@@ -59,7 +59,7 @@ jobs:
 
           git checkout -b $BRANCH
 
-          git add manifest/*
+          git add manifests/*
           git commit -m "Update cli to ${VERSION}"
           git push -u origin $BRANCH
 
