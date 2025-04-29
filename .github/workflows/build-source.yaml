@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 jobs:
-  lint-yaml:
+  build-source:
     name: Build Winget Source
     runs-on: ubuntu-latest
     steps:
