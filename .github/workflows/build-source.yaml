@@ -28,7 +28,7 @@ jobs:
       - name: Build Source Index And Manifests
         run: |
           cd scripts
-          uv run 02-create-catalog.py
+          uv run 02-build-index-db.py
 
       - name: Deploy To gh-pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
