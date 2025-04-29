@@ -1,4 +1,3 @@
-# TODO disabled for now since we need the signing process to be in place
 ---
 name: Build Winget Source
 
@@ -14,7 +13,7 @@ permissions:
   contents: write
 
 jobs:
-  lint-yaml:
+  build-source:
     name: Build Winget Source
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +28,7 @@ jobs:
       - name: Build Source Index And Manifests
         run: |
           cd scripts
-          uv run 02-create-catalog.py
+          uv run 02-build-index-db.py
 
       - name: Deploy To gh-pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
