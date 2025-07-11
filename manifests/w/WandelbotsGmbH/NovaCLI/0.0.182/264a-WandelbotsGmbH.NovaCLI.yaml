@@ -1,0 +1,34 @@
+Author: Wandelbots GmbH
+Copyright: Copyright (c) Wandelbots GmbH.
+DefaultLocale: en-US
+InstallModes:
+- silent
+- silentWithProgress
+InstallerLocale: en-US
+InstallerType: zip
+Installers:
+- Architecture: x64
+  InstallerSha256: b119aeed7702740e2b9debbb6449dfffa814281ca51986e8c413a0f7ded5038f
+  InstallerUrl: https://github.com/wandelbotsgmbh/nova-cli/releases/download/0.0.182/novacli_win64-0.0.182.zip
+  NestedInstallerFiles:
+  - PortableCommandAlias: nova
+    RelativeFilePath: nova.exe
+  NestedInstallerType: portable
+License: Apache 2.0
+ManifestType: merged
+ManifestVersion: 1.4.0
+Moniker: novacli
+PackageIdentifier: WandelbotsGmbH.NovaCLI
+PackageLocale: en-US
+PackageName: NovaCLI
+PackageUrl: https://github.com/wandelbotsgmbh/nova-cli
+PackageVersion: 0.0.182
+Publisher: Wandelbots GmbH
+PublisherSupportUrl: https://github.com/wandelbotsgmbh/nova-cli
+PublisherUrl: https://www.wandelbots.com/
+Scope: user
+ShortDescription: Command line tool for interacting with the Wandelbots Nova.
+Tags:
+- wandelbots
+- nova
+UpgradeBehavior: uninstallPrevious
