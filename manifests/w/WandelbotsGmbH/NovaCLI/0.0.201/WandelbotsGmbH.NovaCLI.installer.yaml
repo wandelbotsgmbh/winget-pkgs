@@ -1,0 +1,19 @@
+InstallModes:
+- silent
+- silentWithProgress
+InstallerLocale: en-US
+InstallerType: zip
+Installers:
+- Architecture: x64
+  InstallerSha256: e3ef0d3172a7ed6a3b0caaaab963d1c38e1264f9ddeb52aa8a43064767d28713
+  InstallerUrl: https://github.com/wandelbotsgmbh/nova-cli/releases/download/0.0.201/novacli_win64-0.0.201.zip
+  NestedInstallerFiles:
+  - PortableCommandAlias: nova
+    RelativeFilePath: nova.exe
+  NestedInstallerType: portable
+ManifestType: installer
+ManifestVersion: 1.4.0
+PackageIdentifier: WandelbotsGmbH.NovaCLI
+PackageVersion: 0.0.201
+Scope: user
+UpgradeBehavior: uninstallPrevious
