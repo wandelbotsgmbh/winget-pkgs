@@ -16,9 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # the PAT may bypass the org ruleset on main, and (unlike GITHUB_TOKEN)
-          # its push triggers the "Build Winget Source" workflow
-          token: ${{ secrets.PAT_FOR_UPDATE_ACTION }}
+          # the PAT is only handed to the push step below
+          persist-credentials: false
       - uses: astral-sh/setup-uv@v5
 
       - name: Verify Parameters
@@ -52,6 +51,9 @@ jobs:
 
       - name: Commit to main
         env:
+          # the PAT may bypass the org ruleset on main, and (unlike GITHUB_TOKEN)
+          # its push triggers the "Build Winget Source" workflow
+          PAT: ${{ secrets.PAT_FOR_UPDATE_ACTION }}
           VERSION: ${{ github.event.client_payload.version }}
         run: |
           git config user.name "github-actions[bot]"
@@ -59,4 +61,4 @@ jobs:
 
           git add manifests/*
           git commit -m "Update cli to ${VERSION}"
-          git push origin HEAD:main
+          git push "https://x-access-token:${PAT}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main
