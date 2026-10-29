@@ -10,12 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
     env:
       VERSION: ${{ github.event.client_payload.version }}
       FILE_HASH: ${{ github.event.client_payload.hash }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          # the PAT may bypass the org ruleset on main, and (unlike GITHUB_TOKEN)
+          # its push triggers the "Build Winget Source" workflow
+          token: ${{ secrets.PAT_FOR_UPDATE_ACTION }}
       - uses: astral-sh/setup-uv@v5
 
       - name: Verify Parameters
@@ -47,21 +50,13 @@ jobs:
           cd scripts
           uv run 01-create-entry.py $VERSION $FILE_HASH
 
-      - name: Create PR
+      - name: Commit to main
         env:
-          GH_TOKEN: ${{ secrets.PAT_FOR_UPDATE_ACTION }}
           VERSION: ${{ github.event.client_payload.version }}
         run: |
-          BRANCH="feature/update-cli-to-${VERSION}"
-
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git checkout -b $BRANCH
-
           git add manifests/*
           git commit -m "Update cli to ${VERSION}"
-          git push -u origin $BRANCH
-
-          gh pr create --title "Update cli to ${VERSION}" --body "Automated PR from Nova CLI release" --base main
-          gh pr merge --squash --auto
+          git push origin HEAD:main
